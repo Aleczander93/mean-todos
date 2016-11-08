@@ -22,6 +22,16 @@ router.get('/todos', function(req, res){
 });
 
 router.get('/todos/:id', function(req, res){
+  Todo.find({}, function(err, foundTodos){
+    if(err){
+      res.status(500).json({
+        err: err
+      });
+    }
+      res.status(200).json({
+        todos:foundTodos
+    });
+  });
 });
 
 //beginning of POST
