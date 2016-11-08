@@ -7,9 +7,24 @@ var bodyParser = require('body-parser');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
+//Beginning of GET
+router.get('/todos', function(req, res){
+  Todo.find({}, function(err, foundTodos){
+    if(err){
+      res.status(500).json({
+        err: err
+      });
+    }
+      res.status(200).json({
+        todos:foundTodos
+    });
+  });
+});
 
-router.get('/todos', function(req, res){});
-router.get('/todos/:id', function(req, res){});
+router.get('/todos/:id', function(req, res){
+});
+
+//beginning of POST
 router.post('/todos', function(req, res){
   console.log(req.body);
   var todo = new Todo(req.body);
@@ -25,6 +40,7 @@ router.post('/todos', function(req, res){
     });
   });
 });
+
 router.put('/todos/:id', function(req, res){
 
 });
