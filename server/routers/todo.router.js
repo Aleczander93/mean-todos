@@ -34,6 +34,19 @@ router.get('/todos/:id', function(req, res){
   });
 });
 
+router.get('/todos/description/:desc', function(req, res){
+  Todo.find({description: req.params.description}, 'description' , function(err, foundTodo){
+    if (err){
+      res.status(500).json({
+        err:err
+      });
+    }
+      res.status(200).json({
+        todos:foundTodo
+      });
+    });
+  });
+
 //beginning of POST
 router.post('/todos', function(req, res){
   console.log(req.body);
@@ -51,6 +64,7 @@ router.post('/todos', function(req, res){
   });
 });
 
+//beginning of PUT
 router.put('/todos/:id', function(req, res){
   Todo.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldTodo){
     if(err){
@@ -64,6 +78,7 @@ router.put('/todos/:id', function(req, res){
   });
 });
 
+//beginning of delete
 router.delete('/todos/:id', function(req, res){
  Todo.findOneAndRemove({_id: req.params.id}, function(err,deletedTodo){
    if(err){
