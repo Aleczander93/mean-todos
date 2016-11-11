@@ -12,6 +12,12 @@
     $scope.editTodo = editTodo;
     $scope.saveTodo = saveTodo;
 
+    $scope.$watch(function(){
+      return TodoService.get();
+    }, function(){
+      $scope.todos = TodoService.get();
+    });
+
     function createTodo(newTodo){
       TodoService.create(newTodo);
       $scope.newTodo = '';
@@ -23,7 +29,7 @@
       todo.isBeingEdited = true;
     }
     function saveTodo(index, todo){
-      TodoService.update(index, todo.desc);
+      TodoService.update(index, todo); //removed desc because we moved data stuff into the service.js
       todo.isBeingEdited = false;
     }
 
