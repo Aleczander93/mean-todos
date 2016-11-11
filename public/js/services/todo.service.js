@@ -29,7 +29,16 @@
       return todos;
     }
 
-    function createOneTodo(todo){}
+    function createOneTodo(todo){
+      debugger
+      $http.post('.todos', todo)
+      .then(function(response){
+        todos.push(todo);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
     function updateOneTodo(index, todo){}
     function deleteOneTodo(index){}
 
