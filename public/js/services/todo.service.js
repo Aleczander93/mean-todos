@@ -29,9 +29,27 @@
       return todos;
     }
 
-    function createOneTodo(todo){}
+    function createOneTodo(todo){
+      $http.post('/todos', todo)
+        .then(function(response){
+          todos.push(todo);
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+    }
+
     function updateOneTodo(index, todo){}
-    function deleteOneTodo(index){}
+
+    function deleteOneTodo(index){
+      $http.delete('/todos', index)
+      .then(function(response){
+        $scope.todo.splice(index);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
 
   }
 }());

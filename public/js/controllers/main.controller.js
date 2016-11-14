@@ -24,6 +24,7 @@
     }
     function deleteTodo(index){
       TodoService.delete(index);
+      $scope.newTodo = 'todo';
     }
     function editTodo(todo){
       todo.isBeingEdited = true;
